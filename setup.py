@@ -17,4 +17,4 @@ setup(name='dotini',
       license='MIT',
       packages=['dotini'],
       include_package_data=True,
-      zip_safe=False)
+      zip_safe=True)

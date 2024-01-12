@@ -33,13 +33,14 @@ Example configuration file:
 import configparser
 
 
-__copyright__ = 'Copyright (c) 2018 James Thomas Kirkpatrick IV'
-__license__ = 'MIT'
-__version__ = '0.0.1'
+__copyright__ = "Copyright (c) 2018 James Thomas Kirkpatrick IV"
+__license__ = "MIT"
+__version__ = "0.0.1"
 
 
 class _ConfigSection(object):
     """Hold settings for a section of the configuration file."""
+
     def __getattr__(self, attr):
         if attr in self.__dict__:
             return self.__dict__[attr]
@@ -61,11 +62,12 @@ def read(config_file):
     dotini = _ConfigSection()
 
     for section in config.sections():
-        
         settings = _ConfigSection()
         for key, value in config.items(section):
-            setattr(settings, key, value)
+            setattr(
+                settings, key.lower().replace(" ", "_"), value.lower().replace(" ", "_")
+            )
 
-        setattr(dotini, section, settings)
+        setattr(dotini, section.lower().replace(" ", "_"), settings)
 
     return dotini
